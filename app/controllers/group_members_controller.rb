@@ -2,6 +2,8 @@ class GroupMembersController < ApplicationController
   before_action :set_group_member, only: [ :destroy]
 
 
+
+
   # POST /group_members
   def create
     @group_member = GroupMember.new(group_member_params)
