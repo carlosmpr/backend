@@ -1,3 +1,8 @@
+
+require 'jwt'
+
+
+
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
@@ -17,6 +22,29 @@ class UsersController < ApplicationController
     else
       render json: @user.errors, status: :unprocessable_entity
     end
+  end
+
+  def login
+    hmac_secret = 'my$ecretK3y'
+    begin
+      @user = User.find_by(email: params[:email])
+      userModel = {
+        email: @user.email,
+        name:@user.name, 
+       github: @user.github,
+        image: @user.image , 
+        phone: @user.phone
+      }
+      if @user.authenticate(params[:password])
+        token = JWT.encode userModel, hmac_secret, 'HS256'
+        render json: {msg: token}
+      else
+        render json: {msg:'Invalid credentials'}
+      end
+    rescue => exception
+      render json: {msg:'Invalid credentials'}
+    end
+
   end
 
   # DELETE /users/1

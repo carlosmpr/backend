@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2021_07_30_132643) do
     t.string "name"
     t.string "solution"
     t.string "description"
+    t.string "instructions"
     t.boolean "user_created"
     t.integer "user_id"
     t.integer "programing_language_id"
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_07_30_132643) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
+    t.string "description"
     t.integer "programing_language_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -40,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_07_30_132643) do
 
   create_table "programing_languages", force: :cascade do |t|
     t.string "name"
+    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -51,17 +54,10 @@ ActiveRecord::Schema.define(version: 2021_07_30_132643) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "user_programing_languages", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "programing_language_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.string "github"
     t.string "image"
     t.string "phone"
