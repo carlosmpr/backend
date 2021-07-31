@@ -13,7 +13,7 @@ class User < ApplicationRecord
         decoded_token = JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }
         user = decoded_token[0]
         User.find_by(email: user["email"])
-        true
+        user
         rescue => exception
             false
         end
