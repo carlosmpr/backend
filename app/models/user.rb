@@ -1,9 +1,9 @@
 class User < ApplicationRecord
     has_secure_password
-    has_many :user_challenges
+    has_many :user_challenges, dependent: :destroy
     has_many :code_challenges, through: :user_challenges
     has_many :programing_languages, through: :user_challenges
-    has_many :group_members
+    has_many :group_members, dependent: :destroy
     has_many :groups, through: :group_members
 
 

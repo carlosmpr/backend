@@ -8,5 +8,6 @@ Rails.application.routes.draw do
 
   
   post '/login', to: 'users#login'
+  post '/user_challenges/yourchallanges', to: 'user_challenges#your_challange'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

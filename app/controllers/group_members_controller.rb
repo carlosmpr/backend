@@ -23,7 +23,7 @@ class GroupMembersController < ApplicationController
     user  = User.validateUser(params[:token])
     if user
       begin
-        user_member = GroupMember.find(params[:group_id])
+        user_member = GroupMember.find_by(user_id: user['id'], group_id:params[:group_id])
         user_member.destroy
         render json: {msg:"Your not Member of the group anymore"}
       rescue => exception
