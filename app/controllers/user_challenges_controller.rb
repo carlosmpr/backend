@@ -1,15 +1,18 @@
 class UserChallengesController < ApplicationController
-  before_action :set_user_challenge, only: [:show, :update, :destroy]
-
+  
   
   # POST /user_challenges
   def create
-    @user_challenge = UserChallenge.new(user_challenge_params)
-
-    if @user_challenge.save
-      render json: @user_challenge, status: :created, location: @user_challenge
+    user  = User.validateUser(params[:token])
+    if user
+        @user_challenge = UserChallenge.new(user_id: user['id'], code_challenge_id: params[:challange_id])
+        if @user_challenge.save
+          render json: @user_challenge, status: :created
+        else
+          render json: @user_challenge.errors, status: :unprocessable_entity
+        end
     else
-      render json: @user_challenge.errors, status: :unprocessable_entity
+      render json: {msg: 'Unauthorized'}
     end
   end
 
@@ -17,17 +20,19 @@ class UserChallengesController < ApplicationController
 
   # DELETE /user_challenges/1
   def destroy
-    @user_challenge.destroy
+    user  = User.validateUser(params[:token])
+    if user
+      begin
+        user_challange = UserChallenge.find(params[:challange_id])
+        user_challange.destroy
+        render json: {msg:"Unfollow challange"}
+      rescue => exception
+        render json: {msg:"Error check again"}
+      end
+    else
+      render json: {msg: 'Unauthorized'}
+    end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user_challenge
-      @user_challenge = UserChallenge.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def user_challenge_params
-      params.require(:user_challenge).permit(:user_id, :code_challenge_id)
-    end
+ 
 end

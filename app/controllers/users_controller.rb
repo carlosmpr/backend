@@ -58,7 +58,7 @@ class UsersController < ApplicationController
 
     def user_model(user)
       userModel = {
-        id: user.id
+        id: user.id,
         email: user.email,
         name:user.name, 
        github: user.github,

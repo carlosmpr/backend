@@ -20,10 +20,10 @@
 #     ActiveRecord::Base.connection.reset_sequence!(t)
 # end
 
-# ProgramingLanguage.create(name:'Ruby')
-# ProgramingLanguage.create(name:'React')
-# ProgramingLanguage.create(name:'CSS')
-# ProgramingLanguage.create(name:'HTML')
+ProgramingLanguage.create(name:'Ruby')
+ProgramingLanguage.create(name:'React')
+ProgramingLanguage.create(name:'CSS')
+ProgramingLanguage.create(name:'HTML')
 
 
 User.create(name:'Carlos', email:'carlos@email', password:'carlospass', github:'carlosgithub', image:'carlosimage', phone:'000000000')
@@ -31,10 +31,10 @@ User.create(name:'Jhon', email:'jhon@email', password:'jhonpass', github:'jhongi
 User.create(name:'peter', email:'peter@email', password:'peterpass', github:'petergithub', image:'peterimage', phone:'000000000')
 
 
-# CodeChallenge.create(name:'Fizzbuz', description:'Do a fizzbuz' , user_created:false,  programing_language_id:1, difficulty:'biginners')
-# CodeChallenge.create(name:'Card', description:'Do a card css' , user_created:false,  programing_language_id:3,difficulty:'biginners')
-# CodeChallenge.create(name:'Calculator ', description:'React' , user_created:false,  programing_language_id:2,difficulty:'biginners')
-# CodeChallenge.create(name:'Calculator ', description:'React' , user_created:false,  programing_language_id:2,difficulty:'biginners')
+CodeChallenge.create(name:'Fizzbuz', description:'Do a fizzbuz' , user_created:false,  programing_language_id:1, difficulty:'biginners')
+CodeChallenge.create(name:'Card', description:'Do a card css' , user_created:false,  programing_language_id:3,difficulty:'biginners')
+CodeChallenge.create(name:'Calculator ', description:'React' , user_created:false,  programing_language_id:2,difficulty:'biginners')
+CodeChallenge.create(name:'Calculator ', description:'React' , user_created:false,  programing_language_id:2,difficulty:'biginners')
 
 
 # Group.create(name:'ReactMasters', programing_language_id:2)
