@@ -1,5 +1,19 @@
 class GroupMembersController < ApplicationController
   
+  def your_groups
+    user  = User.validateUser(params[:token])
+    if user
+       group = User.find(user['id'] )
+       if group.groups.length > 0
+       render json: group.groups
+       else
+        render json: {msg: 'no code group found'}
+       end
+    else
+      render json: {msg: 'Unauthorized'}
+    end
+  end
+
   # POST /group_members
   def create
     user  = User.validateUser(params[:token])
