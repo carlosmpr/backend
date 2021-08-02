@@ -33,8 +33,9 @@ class GroupMembersController < ApplicationController
   end
 
   # DELETE /group_members/1
-  def destroy
+  def group_delete
     user  = User.validateUser(params[:token])
+   
     if user
       begin
         user_member = GroupMember.find_by(user_id: user['id'], group_id:params[:group_id])

@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   
   post '/login', to: 'users#login'
   post '/me', to: 'users#me'
+  
   post '/user_challenges/yourchallanges', to: 'user_challenges#your_challange'
+
+  post '/group_members/delete', to: 'group_members#group_delete'
   post '/group_members/yourmemberships', to: 'group_members#your_groups'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
