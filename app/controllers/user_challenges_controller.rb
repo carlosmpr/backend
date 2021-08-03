@@ -33,7 +33,7 @@ class UserChallengesController < ApplicationController
   
 
   # DELETE /user_challenges/1
-  def destroy
+  def delete_challange
     user  = User.validateUser(params[:token])
     if user
       begin
