@@ -7,6 +7,8 @@ class User < ApplicationRecord
     has_many :groups, through: :group_members
 
 
+    validates :email, presence: true
+    validates :email, uniqueness: { case_sensitive: true }
     def self.validateUser(token)
         begin
         hmac_secret = 'my$ecretK3y'

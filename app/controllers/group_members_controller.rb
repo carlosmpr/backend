@@ -17,16 +17,22 @@ class GroupMembersController < ApplicationController
   # POST /group_members
   def create
     user  = User.validateUser(params[:token])
+    
     if user
+      membership_exist = GroupMember.find_by(user_id: user['id'],group_id:params[:group_id])
       @group_member = GroupMember.new(user_id: user['id'], group_id:params[:group_id])
 
+      if membership_exist
+        render json: {msg:'User already member of group'}, status: :bad_request
+      else
       if @group_member.save
         render json: @group_member, status: :created
       else
         render json: @group_member.errors, status: :unprocessable_entity
       end
+      end
     else
-      render json: {msg: 'Unauthorized'}
+      render json: {msg: 'Unauthorized'},status: :unprocessable_entity
     end
 
    
@@ -37,6 +43,7 @@ class GroupMembersController < ApplicationController
     user  = User.validateUser(params[:token])
    
     if user
+      
       begin
         user_member = GroupMember.find_by(user_id: user['id'], group_id:params[:group_id])
         user_member.destroy

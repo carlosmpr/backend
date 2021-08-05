@@ -12,6 +12,7 @@ class GroupsController < ApplicationController
 
       if membership
         all_members = Group.find(params[:group_id])
+        
         render json: all_members.users
         else
           render json: {msg: 'Error check group or membership'}

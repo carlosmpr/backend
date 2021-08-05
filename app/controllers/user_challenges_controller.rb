@@ -19,12 +19,17 @@ class UserChallengesController < ApplicationController
   def create
     user  = User.validateUser(params[:token])
     if user
+        challange_exist = UserChallenge.find_by(user_id: user['id'],code_challenge_id: params[:challange_id] )
+        if challange_exist
+          render json: {msg: 'User already following the challange'}, status: :bad_request
+        else
         @user_challenge = UserChallenge.new(user_id: user['id'], code_challenge_id: params[:challange_id])
         if @user_challenge.save
           render json: @user_challenge, status: :created
         else
           render json: @user_challenge.errors, status: :unprocessable_entity
         end
+      end
     else
       render json: {msg: 'Unauthorized'}
     end

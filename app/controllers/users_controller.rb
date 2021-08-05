@@ -11,13 +11,14 @@ class UsersController < ApplicationController
 
   def create
     hmac_secret = 'my$ecretK3y'
-    @user = User.new(user_params)
+    @user = User.new(name:params[:nam], email:params[:email], password:params[:password], github:params[:github], image: params[:image], phone: params[:phone])
     if @user.save
       token = JWT.encode user_model(@user), hmac_secret, 'HS256'
       render json: {token: token}
     else
       render json: @user.errors, status: :unprocessable_entity
     end
+    
   end
 
   # PATCH/PUT /users/1
@@ -37,10 +38,10 @@ class UsersController < ApplicationController
         token = JWT.encode user_model(@user), hmac_secret, 'HS256'
         render json: {token: token}
       else
-        render json: {msg:'Invalid credentials'}
+        render json: {msg:'Invalid credentials'}, status: :unprocessable_entity
       end
     rescue => exception
-      render json: {msg:'Invalid credentials'}
+      render json: {msg:'Invalid credentials'}, status: :bad_request
     end
 
   end
