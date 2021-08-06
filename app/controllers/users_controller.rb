@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def create
     hmac_secret = 'my$ecretK3y'
-    @user = User.new(name:params[:nam], email:params[:email], password:params[:password], github:params[:github], image: params[:image], phone: params[:phone])
+    @user = User.new(name:params[:name], email:params[:email], password:params[:password], github:params[:github], image: params[:image], phone: params[:phone])
     if @user.save
       token = JWT.encode user_model(@user), hmac_secret, 'HS256'
       render json: {token: token}
